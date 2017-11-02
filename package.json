@@ -12,6 +12,11 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
+    "nodemon": "^1.12.1",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.22.0",
+    "sequelize-cli": "^3.0.0",
     "serve-favicon": "~2.4.2"
   }
 }
