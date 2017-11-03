@@ -11,7 +11,7 @@ h1 ,p ,form, h3 {
   text-align: center;
 }
 
-input,label, button {
+input,label, button:first-child {
   width : 60vmin;
   margin: 0;
   box-sizing: border-box;
