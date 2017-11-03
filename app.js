@@ -4,6 +4,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+var multer  = require('multer');
+const Sequelize = require('sequelize');
+
+
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -19,6 +23,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer().none());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

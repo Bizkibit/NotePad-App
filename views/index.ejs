@@ -5,7 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
+    <h1>NotePad App</h1>
     <p>Welcome to <%= title %></p>
+    <div class="board">
+      <form id='new-note-form'>
+        <div>
+          <label for="new"></label>
+          <textarea name="new-note" id="new" rows="8" cols="80" placeholder="Create a new note" wrap="soft" required></textarea>
+        </div>
+        <input type="submit" value="Create">
+      </form>
+    </div>
   </body>
 </html>
