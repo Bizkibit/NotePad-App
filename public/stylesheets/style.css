@@ -1,27 +1,38 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  position: relative;
 }
 
 a {
   color: #00B7FF;
 }
 
-h1 ,p ,form, h3 {
+h1 ,p , h3 {
   text-align: center;
 }
 
-input,label, button:first-child {
+form {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input, button:first-child {
   width : 60vmin;
-  margin: 0;
+  /*margin: 0;*/
   box-sizing: border-box;
+  display: block;
 }
 
 textarea {
   vertical-align: top;
   width : 60vmin;
-  margin: 0;
+  /*margin: 0;*/
   box-sizing: border-box;
+  display: block;
 }
 
 .board {
@@ -39,7 +50,7 @@ textarea {
 
 .note {
   box-sizing: border-box;
-  border: black 2px solid;
+  /*border: black 2px solid;*/
   width: 40vmin;
   height: 40vmin;
   background-color: #ffe191;
@@ -49,7 +60,43 @@ textarea {
   background-origin: border-box;
   background-position: center right;
   background-image:
-   /*url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png),*/ url(http://ak5.picdn.net/shutterstock/videos/4846205/thumb/8.jpg);
+  url(http://ak5.picdn.net/shutterstock/videos/4846205/thumb/8.jpg);
   background-size: 40vmin 40vmin;
   overflow: auto;
+  position: relative;
+}
+
+.delete {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: initial;
+  background-color: transparent;
+  color: transparent;
+  font-size: 3vmin;
+  border: none;
+  outline: none;
+  width: 20%;
+  height: 20%;
+}
+
+.delete:hover {
+  color: #9b7b58;
+}
+
+#editBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#editBox > form {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pin  {
+  background-image: url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png)
 }
