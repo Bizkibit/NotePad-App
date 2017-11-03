@@ -6,3 +6,50 @@ body {
 a {
   color: #00B7FF;
 }
+
+h1 ,p ,form, h3 {
+  text-align: center;
+}
+
+input,label, button {
+  width : 60vmin;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+textarea {
+  vertical-align: top;
+  width : 60vmin;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.board {
+  background-color: #a07d1c;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-image: url(https://img00.deviantart.net/49d3/i/2010/245/0/c/pinboard_texture_by_nikky81-d2xuip9.png);
+  border: #633311 5vmin groove;
+  /*justify-content: space-around;
+  /*width: 100%;*/
+  /*align-content: space-around;*/
+}
+
+.note {
+  box-sizing: border-box;
+  border: black 2px solid;
+  width: 40vmin;
+  height: 40vmin;
+  background-color: #ffe191;
+  /*display: inline-block;*/
+  padding: 5vmin;
+  margin: 5vmin;
+  background-origin: border-box;
+  background-position: center right;
+  background-image:
+   /*url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png),*/ url(http://ak5.picdn.net/shutterstock/videos/4846205/thumb/8.jpg);
+  background-size: 40vmin 40vmin;
+  overflow: auto;
+}

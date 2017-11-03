@@ -6,7 +6,7 @@ module.exports =  {
   // body...
   async indexAction (req, res, next)  {
     try {
-      let notes = await Note.findAll();
+      let notes = await Note.findAll({order: [['createdAt', 'DESC']]});
       res.json(notes);
     } catch (e) {
       res.json(e);

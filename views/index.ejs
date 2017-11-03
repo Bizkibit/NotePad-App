@@ -3,18 +3,22 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/publicApp.js"></script>
   </head>
   <body>
     <h1>NotePad App</h1>
-    <p>Welcome to <%= title %></p>
-    <div class="board">
       <form id='new-note-form'>
         <div>
-          <label for="new"></label>
-          <textarea name="new-note" id="new" rows="8" cols="80" placeholder="Create a new note" wrap="soft" required></textarea>
+          <%# <label for="title">Title:</label>%>
+          <input type="text" name="title" id="title" value="" placeholder="Title">
+        </div>
+        <div>
+          <%# <label for="content"></label>%>
+          <textarea name="content" id="content" rows="8" cols="80" placeholder="Create a new note" wrap="soft" required></textarea>
         </div>
         <input type="submit" value="Create">
       </form>
-    </div>
+      <div class="board">
+      </div>
   </body>
 </html>
