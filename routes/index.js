@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-let {indexAction, postAction, deleteAction } = require('../controllers/notesController')
 
 /* GET home page. */
-router.get('/', indexAction);
+router.get('/', function (req, res, next) {
+  res.render('index', {title: 'cunt'});
+});
 
-router.post('/',postAction);
-
-router.delete('/:id', deleteAction);
 
 module.exports = router;

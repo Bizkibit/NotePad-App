@@ -10,6 +10,7 @@ const Sequelize = require('sequelize');
 
 
 const index = require('./routes/index');
+const notes = require('./routes/notes')
 const users = require('./routes/users');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/notes', notes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
