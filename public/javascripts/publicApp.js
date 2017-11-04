@@ -85,7 +85,7 @@ function deleteNotes(e)  {
   let saveButton = document.querySelector('#save');
   let cancelButton = document.querySelector('#cancel');
   popUp.firstElementChild.addEventListener('submit', saveChanges);
-  // saveButton.addEventListener('click', saveChanges);
+  cancelButton.addEventListener('click', cancelChanges)
 }
 
 
@@ -128,4 +128,11 @@ function editBox(parentElement)  {
   `
   editBox.innerHTML = editBoxHTML;
   return editBox
+}
+
+function cancelChanges(e)  {
+  let editBox = e.target.parentElement.parentElement;
+  editBox.remove();
+  let body = document.querySelector('body');
+  body.style.filter = "";
 }
