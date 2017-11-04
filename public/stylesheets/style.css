@@ -8,11 +8,11 @@ a {
   color: #00B7FF;
 }
 
-h1 ,p , h3 {
+h1 , p , h3 {
   text-align: center;
 }
 
-form {
+#new-note-form {
   text-align: center;
   margin-bottom: 20px;
   display: flex;
@@ -20,14 +20,15 @@ form {
   align-items: center;
 }
 
-input, button:first-child {
+#new-note-form input, button:first-child {
   width : 60vmin;
-  /*margin: 0;*/
   box-sizing: border-box;
   display: block;
+  font-size: 14px;
 }
 
-textarea {
+#new-note-form textarea {
+  font-size: 14px;
   vertical-align: top;
   width : 60vmin;
   /*margin: 0;*/
@@ -43,7 +44,6 @@ textarea {
   justify-content: space-around;
   background-image: url(https://img00.deviantart.net/49d3/i/2010/245/0/c/pinboard_texture_by_nikky81-d2xuip9.png);
   border: #633311 5vmin groove;
-  /*justify-content: space-around;
   /*width: 100%;*/
   /*align-content: space-around;*/
 }
@@ -86,16 +86,59 @@ textarea {
 }
 
 #editBox {
+  display: flex;
+  justify-content: space-around;
+  /*text-align: center;
+  align-items: center;*/
+
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 60vmin;
+  height: 60vmin;
+  background-size: 60vmin 60vmin;
 }
 
-#editBox > form {
+#edit-note-form {
   display: flex;
+  flex-direction: column;
+  width: 100%;
   justify-content: space-around;
 }
+
+#edit-note-form input {
+  /*display: inline-block;*/
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  display: block;
+}
+
+#edit-note-form textarea {
+  /*margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;*/
+  background: transparent;
+  border: none;
+  outline: none;
+  /*box-sizing: border-box;*/
+  display: block;
+  font-size: 14px;
+}
+
+#edit-note-form button {
+  background: transparent;
+  border: initial;
+  align-self: flex-end;
+  display: block;
+}
+
 
 .pin  {
   background-image: url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png)

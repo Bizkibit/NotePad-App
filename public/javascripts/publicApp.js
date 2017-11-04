@@ -1,19 +1,6 @@
 window.onload = function()  {
-
-  let form = document.querySelector('#new-note-form');
-  // let board = document.querySelector('.board');
-  // let notes;
-  // getNotes()
-  // .then(renderNotes)
-  // .then(function() {
-  //   notes = document.querySelectorAll('.note');
-  //   debugger;
-  //   notes.forEach( note => note.addEventListener('mousedown', () => {
-  //     alert('cunt')
-  //   }))
-  // })
   displayNotes();
-
+  let form = document.querySelector('#new-note-form');
 
   form.addEventListener('submit', function(e) {
   	e.preventDefault();
@@ -54,13 +41,9 @@ function displayNotes() {
     let deleteButtons = document.querySelectorAll('.delete');
     let contents = document.querySelectorAll('.note>p, .note>h3')
     deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteNotes));
-    contents.forEach(content => content.addEventListener('click', EditNotes));
-    // notes.forEach( note => note.addEventListener('mousedown', () => {
-    //   alert('cunt')
-    // }))
+    contents.forEach(content => content.addEventListener('dblclick', EditNotes));
   })
 }
-
 
 function deleteNotes(e)  {
   e.stopPropagation();
@@ -73,24 +56,27 @@ function deleteNotes(e)  {
 }
 
   function EditNotes(e)  {
-  // let body = document.querySelector('body');
-  // body.style.filter = "blur(5px)";
-  // let {parentElement} = e.target;
-  // let editBox = document.createElement('div');
-  // editBox.id = "editBox"
-  // editBox.classList.add('note');
-  // editBoxHTML = `
-  //   <form id='edit-note-form'>
-  //     <div>
-  //       <input type="text" name="title" id="title" value="${parentElement.firstElementChild.textContent}">
-  //     </div>
-  //     <div>
-  //       <textarea name="content" id="content" rows="8" cols="80" placeholder="Create a new note" wrap="soft"
-  //       required>${parentElement.lastElementChild.textContent}</textarea>
-  //     </div>
-  //     <input type="submit" value="Create">
-  //   </form>
-  // `
-  // editBox.innerHTML = editBoxHTML;
-  // body.appendChild(editBox);
+  let body = document.querySelector('body');
+  let html = document.querySelector('html');
+  body.style.filter = "blur(5px)";
+  let {parentElement} = e.target;
+
+  let editBox = document.createElement('div');
+  editBox.id = "editBox"
+  editBox.classList.add('note');
+  editBoxHTML = `
+    <form id='edit-note-form'>
+
+        <input type="text" name="title" id="title" value="${parentElement.firstElementChild.textContent}" placeholder="Title">
+
+        <textarea name="content" id="content" placeholder="Create a new note" wrap="soft"
+        required>${parentElement.lastElementChild.textContent}</textarea>
+
+        <input type="submit" id="save" value="Save">
+        <input type="submit" id="cancel" value="Cancel">
+
+    </form>
+  `
+  editBox.innerHTML = editBoxHTML;
+  html.appendChild(editBox);
 }
