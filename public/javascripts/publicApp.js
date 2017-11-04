@@ -60,23 +60,72 @@ function deleteNotes(e)  {
   let html = document.querySelector('html');
   body.style.filter = "blur(5px)";
   let {parentElement} = e.target;
+  // debugger;
+  // editBox(parentElement);
+  // let editBox = document.createElement('div');
+  // editBox.id = "editBox"
+  // editBox.classList.add('note');
+  // editBoxHTML = `
+  //   <form class='edit-note-form' data-note-id="${parentElement.id}">
+  //
+  //       <input type="text" name="title" id="title"
+  //       value="${parentElement.firstElementChild.textContent}" placeholder="Title">
+  //
+  //       <textarea name="content" id="content" placeholder="Create a new note" wrap="soft"
+  //       required>${parentElement.lastElementChild.textContent}</textarea>
+  //
+  //       <input type="submit" id="save" value="Save">
+  //       <input type="submit" id="cancel" value="Cancel">
+  //
+  //   </form>
+  // `
+  // editBox.innerHTML = editBoxHTML;
+  let popUp = editBox(parentElement);
+  html.appendChild(popUp);
+  let saveButton = document.querySelector('#save');
+  let cancelButton = document.querySelector('#cancel');
+  popUp.firstElementChild.addEventListener('submit', saveChanges);
+  // saveButton.addEventListener('click', saveChanges);
+}
 
+
+function saveChanges(event) {
+  event.preventDefault();
+  // let {parentElement} = event.currentTarget;
+  let {currentTarget} = event;
+  let fData = new FormData(currentTarget);
+  let id = currentTarget.dataset.noteId.split('-')[1];
+  debugger;
+  fetch(`/notes/${id}`, {
+    method: 'PATCH',
+    body: fData
+  })
+  .then(note => {
+      currentTarget.parentElement.remove();
+      let body = document.querySelector('body');
+      body.style.filter = "";
+  })
+  .then(displayNotes);
+}
+
+function editBox(parentElement)  {
   let editBox = document.createElement('div');
   editBox.id = "editBox"
   editBox.classList.add('note');
   editBoxHTML = `
-    <form id='edit-note-form'>
+    <form class='edit-note-form' data-note-id="${parentElement.id}">
 
-        <input type="text" name="title" id="title" value="${parentElement.firstElementChild.textContent}" placeholder="Title">
+        <input type="text" name="title" id="title"
+        value="${parentElement.firstElementChild.textContent}" placeholder="Title">
 
         <textarea name="content" id="content" placeholder="Create a new note" wrap="soft"
         required>${parentElement.lastElementChild.textContent}</textarea>
 
         <input type="submit" id="save" value="Save">
-        <input type="submit" id="cancel" value="Cancel">
+        <input type="button" id="cancel" value="Cancel">
 
     </form>
   `
   editBox.innerHTML = editBoxHTML;
-  html.appendChild(editBox);
+  return editBox
 }
