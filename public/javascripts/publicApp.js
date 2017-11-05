@@ -26,12 +26,14 @@ function renderNotes(notes)  {
       <div class="note" id="note-${note.id}">
         <h3>${note.title}</h3>
         <input class="delete" type="button" name="deleteButton" value="X">
+        <input class="pin" type="button" name="pinButton">
         <p>${note.content}</p>
       </div>
     `
   }).join('')
   board.innerHTML = notesHTML;
 }
+// {/* <div class="pin"></div> */}
 
 function displayNotes() {
   getNotes()
@@ -39,9 +41,11 @@ function displayNotes() {
   .then(function() {
     let notes = document.querySelectorAll('.note');
     let deleteButtons = document.querySelectorAll('.delete');
-    let contents = document.querySelectorAll('.note>p, .note>h3')
+    let contents = document.querySelectorAll('.note>p, .note>h3');
+    let pinButtons = document.querySelectorAll('.pin');
     deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteNotes));
     contents.forEach(content => content.addEventListener('dblclick', EditNotes));
+    pinButtons.forEach(pin => pin.addEventListener('mousedown', pinMove));
   })
 }
 
@@ -60,29 +64,9 @@ function deleteNotes(e)  {
   let html = document.querySelector('html');
   body.style.filter = "blur(5px)";
   let {parentElement} = e.target;
-  // debugger;
-  // editBox(parentElement);
-  // let editBox = document.createElement('div');
-  // editBox.id = "editBox"
-  // editBox.classList.add('note');
-  // editBoxHTML = `
-  //   <form class='edit-note-form' data-note-id="${parentElement.id}">
-  //
-  //       <input type="text" name="title" id="title"
-  //       value="${parentElement.firstElementChild.textContent}" placeholder="Title">
-  //
-  //       <textarea name="content" id="content" placeholder="Create a new note" wrap="soft"
-  //       required>${parentElement.lastElementChild.textContent}</textarea>
-  //
-  //       <input type="submit" id="save" value="Save">
-  //       <input type="submit" id="cancel" value="Cancel">
-  //
-  //   </form>
-  // `
-  // editBox.innerHTML = editBoxHTML;
   let popUp = editBox(parentElement);
   html.appendChild(popUp);
-  let saveButton = document.querySelector('#save');
+  // let saveButton = document.querySelector('#save');
   let cancelButton = document.querySelector('#cancel');
   popUp.firstElementChild.addEventListener('submit', saveChanges);
   cancelButton.addEventListener('click', cancelChanges)
@@ -135,4 +119,27 @@ function cancelChanges(e)  {
   editBox.remove();
   let body = document.querySelector('body');
   body.style.filter = "";
+}
+
+function pinMove(e)  {
+  let {parentElement} = e.target;
+  let board = document.querySelector('.board');
+  let {boardTop, boardLeft} =board.getBoundingClientRect();
+  parentElement.style.position= "absolute";
+  let initialTop = parentElement.getBoundingClientRect().top;
+  let initialLeft = parentElement.getBoundingClientRect().left;
+  debugger;
+  parentElement.style.top= `${boardTop+e.clientY}px`;
+  parentElement.style.left= `${boardLeft+e.clientX}px`;
+  board.addEventListener('mousemove', function(event) {
+    parentElement.style.zIndex= "1";
+    console.log('------------------------------------------------')
+    console.log('mousedown position X:',e.screenX,'Y:',e.screenY);
+    console.log('initial position:'+'X:',initialTop, 'Y:', initialTop);
+    console.log('mousemove position:'+'X:',event.screenX, 'Y:', event.screenY);
+    console.log('mousemove position:'+'X:',event.clientX, 'Y:', event.clientY);
+    console.log('------------------------------------------------')
+    parentElement.style.top= `${event.screenY-initialTop}px`;
+    parentElement.style.left= `${event.screenX-initialLeft}px`;
+  })
 }

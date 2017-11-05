@@ -46,6 +46,7 @@ h1 , p , h3 {
   border: #633311 5vmin groove;
   /*width: 100%;*/
   /*align-content: space-around;*/
+  position: relative;
 }
 
 .note {
@@ -141,5 +142,16 @@ h1 , p , h3 {
 
 
 .pin  {
-  background-image: url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png)
+  background-image: url(http://www.clker.com/cliparts/B/V/P/X/Z/e/thumbtack-pushpin-2-hi.png);
+  background-color: transparent;
+  background-origin: border-box;
+  background-position: center right;
+  position: absolute;
+  width:10%;
+  height:10%;
+  background-size: 100% 100%;
+  display: inline-block;
+  top: 5%;
+  left:45%;
+  border: none;
 }
