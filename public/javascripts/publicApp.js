@@ -80,6 +80,7 @@ function deleteNotes(e)  {
   e.stopPropagation();
   let {currentTarget} = e;
   let id = currentTarget.parentElement.id.split('-')[1];
+  delete_cookie(`${currentTarget.parentElement.id}`)
   fetch(`/notes/${id}`, {
     method: 'delete'
   })
@@ -217,3 +218,7 @@ function saveChangesNew(event) {
   })
   .then(displayNotes);
 }
+
+const delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
