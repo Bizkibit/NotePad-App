@@ -1,29 +1,29 @@
 window.onload = function()  {
   displayNotes();
-  let form = document.querySelector('#new-note-form');
+  // let form = document.querySelector('#new-note-form');
   let button = document.querySelector('button');
-  button.addEventListener('click', function(e)  {
-    let body = document.querySelector('body');
-    let html = document.querySelector('html');
-    body.style.filter = "blur(5px)";
-    // let {parentElement} = e.target;
-    let popUp = newNoteBox();
-    html.appendChild(popUp);
-    let cancelButton = document.querySelector('#cancel');
-    popUp.firstElementChild.addEventListener('submit', saveChangesNew);
-    cancelButton.addEventListener('click', cancelChanges)
-  })
+  button.addEventListener('click', newNote )
+    // let body = document.querySelector('body');
+    // let html = document.querySelector('html');
+    // body.style.filter = "blur(5px)";
+    // // let {parentElement} = e.target;
+    // let popUp = newNoteBox();
+    // html.appendChild(popUp);
+    // let cancelButton = document.querySelector('#cancel');
+    // popUp.firstElementChild.addEventListener('submit', saveChangesNew);
+    // cancelButton.addEventListener('click', cancelChanges)
 
-  form.addEventListener('submit', function(e) {
-  	e.preventDefault();
-  	let {currentTarget} = e;
-  	let fData = new FormData(currentTarget);
-  	fetch('/notes', {
-  		method: 'POST',
-  		body: fData
-  	}).then(displayNotes);
-    currentTarget.reset();
-  });
+
+  // form.addEventListener('submit', function(e) {
+  // 	e.preventDefault();
+  // 	let {currentTarget} = e;
+  // 	let fData = new FormData(currentTarget);
+  // 	fetch('/notes', {
+  // 		method: 'POST',
+  // 		body: fData
+  // 	}).then(displayNotes);
+  //   currentTarget.reset();
+  // });
 
 }
 
@@ -45,12 +45,12 @@ function renderNotes(notes)  {
   }).join('')
   board.innerHTML = notesHTML;
 }
-// {/* <div class="pin"></div> */}
 
 function displayNotes() {
   getNotes()
   .then(renderNotes)
   .then(function() {
+    personalizeNotes();
     let notes = document.querySelectorAll('.note');
     let deleteButtons = document.querySelectorAll('.delete');
     let contents = document.querySelectorAll('.note>p, .note>h3');
@@ -59,6 +59,21 @@ function displayNotes() {
     contents.forEach(content => content.addEventListener('dblclick', EditNotes));
     pinButtons.forEach(pin => pin.addEventListener('mousedown', pinMove));
   })
+}
+
+function personalizeNotes() {
+  if (document.cookie !== "") {
+    let notes = document.cookie.split(';');
+    notes = notes.map(function(note){return note.split('=')})
+    notes.forEach(note => {
+      let node = document.querySelector(`#${note[0].trim()}`);
+      let coordinates = JSON.parse(note[1]);
+      node.style.position = 'absolute';
+      node.style.top = `${coordinates.x}px`;
+      node.style.left = `${coordinates.y}px`;
+      node.style.zIndex = "1";
+    })
+  }
 }
 
 function deleteNotes(e)  {
@@ -147,8 +162,21 @@ function pinMove(e)  {
     parentElement.style.left= `${noteLeft}px`;
     target.addEventListener('mouseup', ()=>{
       board.removeEventListener('mousemove', MM);
+      document.cookie = `${parentElement.id}={"x":${noteTop}, "y":${noteLeft}}`
     });
   })
+}
+
+function newNote(e)  {
+  let body = document.querySelector('body');
+  let html = document.querySelector('html');
+  body.style.filter = "blur(5px)";
+  // let {parentElement} = e.target;
+  let popUp = newNoteBox();
+  html.appendChild(popUp);
+  let cancelButton = document.querySelector('#cancel');
+  popUp.firstElementChild.addEventListener('submit', saveChangesNew);
+  cancelButton.addEventListener('click', cancelChanges)
 }
 
 function newNoteBox()  {
