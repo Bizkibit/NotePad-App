@@ -154,7 +154,8 @@ h1 , p , h3 {
   top: 5%;
   left:45%;
   border: none;
-  outline-color: #9b7b58;
+  /*outline-color: #9b7b58;*/
+  outline: none;
 }
 
 .pin:active  {

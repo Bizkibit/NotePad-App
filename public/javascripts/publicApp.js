@@ -1,6 +1,18 @@
 window.onload = function()  {
   displayNotes();
   let form = document.querySelector('#new-note-form');
+  let button = document.querySelector('button');
+  button.addEventListener('click', function(e)  {
+    let body = document.querySelector('body');
+    let html = document.querySelector('html');
+    body.style.filter = "blur(5px)";
+    // let {parentElement} = e.target;
+    let popUp = newNoteBox();
+    html.appendChild(popUp);
+    let cancelButton = document.querySelector('#cancel');
+    popUp.firstElementChild.addEventListener('submit', saveChangesNew);
+    cancelButton.addEventListener('click', cancelChanges)
+  })
 
   form.addEventListener('submit', function(e) {
   	e.preventDefault();
@@ -79,7 +91,6 @@ function saveChanges(event) {
   let {currentTarget} = event;
   let fData = new FormData(currentTarget);
   let id = currentTarget.dataset.noteId.split('-')[1];
-  debugger;
   fetch(`/notes/${id}`, {
     method: 'PATCH',
     body: fData
@@ -138,4 +149,43 @@ function pinMove(e)  {
       board.removeEventListener('mousemove', MM);
     });
   })
+}
+
+function newNoteBox()  {
+  let newBox = document.createElement('div');
+  newBox.classList.add('note');
+  newBox.id = "editBox";
+  newBoxHTML = `
+    <form class='edit-note-form'>
+
+        <input type="text" name="title" id="title"
+        placeholder="Title">
+
+        <textarea name="content" id="content" placeholder="Create a new note" wrap="soft"
+        required></textarea>
+
+        <input type="submit" id="save" value="Save">
+        <input type="button" id="cancel" value="Cancel">
+
+    </form>
+  `;
+  newBox.innerHTML = newBoxHTML;
+  return newBox
+}
+
+function saveChangesNew(event) {
+  event.preventDefault();
+  // let {parentElement} = event.currentTarget;
+  let {currentTarget} = event;
+  let fData = new FormData(currentTarget);
+  fetch(`/notes`, {
+    method: 'POST',
+    body: fData
+  })
+  .then(note => {
+      currentTarget.parentElement.remove();
+      let body = document.querySelector('body');
+      body.style.filter = "";
+  })
+  .then(displayNotes);
 }
