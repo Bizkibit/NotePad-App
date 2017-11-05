@@ -122,24 +122,20 @@ function cancelChanges(e)  {
 }
 
 function pinMove(e)  {
+  // let {target:[{parentElement: parentElement}]} = e;
+  let {target} = e;
   let {parentElement} = e.target;
   let board = document.querySelector('.board');
-  let {boardTop, boardLeft} =board.getBoundingClientRect();
-  parentElement.style.position= "absolute";
-  let initialTop = parentElement.getBoundingClientRect().top;
-  let initialLeft = parentElement.getBoundingClientRect().left;
-  debugger;
-  parentElement.style.top= `${boardTop+e.clientY}px`;
-  parentElement.style.left= `${boardLeft+e.clientX}px`;
-  board.addEventListener('mousemove', function(event) {
+  // let {top:pinTop, left:pinLeft} =target.getBoundingClientRect();
+  let {height: noteH, width: noteL} = parentElement.getBoundingClientRect();
+  board.addEventListener('mousemove', function MM(event) {
+    let [noteTop, noteLeft] = [event.pageY-0.25*noteH, event.pageX-0.7*noteL]
+    parentElement.style.position= "absolute";
     parentElement.style.zIndex= "1";
-    console.log('------------------------------------------------')
-    console.log('mousedown position X:',e.screenX,'Y:',e.screenY);
-    console.log('initial position:'+'X:',initialTop, 'Y:', initialTop);
-    console.log('mousemove position:'+'X:',event.screenX, 'Y:', event.screenY);
-    console.log('mousemove position:'+'X:',event.clientX, 'Y:', event.clientY);
-    console.log('------------------------------------------------')
-    parentElement.style.top= `${event.screenY-initialTop}px`;
-    parentElement.style.left= `${event.screenX-initialLeft}px`;
+    parentElement.style.top= `${noteTop}px`;
+    parentElement.style.left= `${noteLeft}px`;
+    target.addEventListener('mouseup', ()=>{
+      board.removeEventListener('mousemove', MM);
+    });
   })
 }

@@ -46,7 +46,7 @@ h1 , p , h3 {
   border: #633311 5vmin groove;
   /*width: 100%;*/
   /*align-content: space-around;*/
-  position: relative;
+  /*position: relative;*/
 }
 
 .note {
@@ -154,4 +154,11 @@ h1 , p , h3 {
   top: 5%;
   left:45%;
   border: none;
+  outline-color: #9b7b58;
+}
+
+.pin:active  {
+  transform: scale(1.5);
+  width:15%;
+  height:15%;
 }
