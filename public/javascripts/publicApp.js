@@ -169,7 +169,8 @@ function pinMove(e)  {
 }
 
 function newNote(e)  {
-  let body = document.querySelector('body');
+  // let body = document.querySelector('body');
+  let {body} = document;
   let html = document.querySelector('html');
   body.style.filter = "blur(5px)";
   // let {parentElement} = e.target;
