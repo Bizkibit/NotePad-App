@@ -2,39 +2,42 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   position: relative;
+  transition: filter 0.1s;
 }
 
 a {
   color: #00B7FF;
 }
 
-h1 , p , h3 {
+h1 , p , h3, #new-note-button {
   text-align: center;
 }
 
-#new-note-form {
+
+  #new-note-form {
   text-align: center;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  }
 
-#new-note-form input, button:first-child {
+  #new-note-form input, button:first-child {
   width : 60vmin;
   box-sizing: border-box;
   display: block;
   font-size: 14px;
-}
+  }
 
-#new-note-form textarea {
+  #new-note-form textarea {
   font-size: 14px;
   vertical-align: top;
   width : 60vmin;
   /*margin: 0;*/
   box-sizing: border-box;
   display: block;
-}
+  }
+
 
 .board {
   background-color: #a07d1c;
@@ -106,6 +109,7 @@ h1 , p , h3 {
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
+  transition: display 0.1s;
 }
 
 .edit-note-form input {
@@ -156,6 +160,7 @@ h1 , p , h3 {
   border: none;
   /*outline-color: #9b7b58;*/
   outline: none;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
 }
 
 .pin:active  {
