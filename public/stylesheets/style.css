@@ -3,6 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   position: relative;
   transition: filter 0.1s;
+  background-image: url(http://www.powerpointhintergrund.com/uploads/wood-background-29.jpeg);
+  background-color: black;
+}
+
+body > h1 {
+  color: #efddac;
 }
 
 a {
