@@ -4,8 +4,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-var multer  = require('multer');
+const multer  = require('multer');
 const Sequelize = require('sequelize');
+const { Client } = require('pg');
 
 
 
@@ -16,7 +17,6 @@ const users = require('./routes/users');
 const app = express();
 
 
-const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
