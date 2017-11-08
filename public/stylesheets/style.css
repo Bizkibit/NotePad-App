@@ -174,3 +174,21 @@ h1 , p , h3, #new-note-button {
   width:15%;
   height:15%;
 }
+
+.star {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 20%;
+  height: 20%;
+  font-size: 3vmin;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #9b7b58;
+}
+
+.starred  {
+
+}

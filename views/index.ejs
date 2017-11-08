@@ -3,11 +3,17 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/javascripts/publicApp.js"></script>
   </head>
   <body>
     <h1>NotePad App</h1>
     <button type="button" name="button" id="new-note-button">New</button>
+    <label for="sort">sort by:</label>
+    <select class="" name="" id="sort">
+      <option value="1">date</option>
+      <option value="2">starred</option>
+    </select>
       <%# <form id='new-note-form'>
         <div>
           <input type="text" name="title" id="title" value="" placeholder="Title">

@@ -39,6 +39,7 @@ function renderNotes(notes)  {
         <h3>${note.title}</h3>
         <input class="delete" type="button" name="deleteButton" value="X">
         <input class="pin" type="button" name="pinButton">
+        <button class="star" name="starButton"><i class="fa fa-star-o" aria-hidden="true"></i></button>
         <p>${note.content}</p>
       </div>
     `
@@ -53,11 +54,13 @@ function displayNotes() {
     personalizeNotes();
     let notes = document.querySelectorAll('.note');
     let deleteButtons = document.querySelectorAll('.delete');
+    let starButtons = document.querySelectorAll('.star');
     let contents = document.querySelectorAll('.note>p, .note>h3');
     let pinButtons = document.querySelectorAll('.pin');
     deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteNotes));
     contents.forEach(content => content.addEventListener('dblclick', EditNotes));
     pinButtons.forEach(pin => pin.addEventListener('mousedown', pinMove));
+    starButtons.forEach(starButton => starButton.addEventListener('click', starNotes));
   })
 }
 
@@ -223,3 +226,13 @@ function saveChangesNew(event) {
 const delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
+
+function starNotes(e)  {
+  let {parentElement} = e.currentTarget;
+  parentElement.classList.toggle("starred");
+  if (parentElement.classList.contains("starred"))  {
+    e.currentTarget.innerHTML = `<i class="fa fa-star" aria-hidden="true"></i>`
+  } else {
+    e.currentTarget.innerHTML = `<i class="fa fa-star-o" aria-hidden="true"></i>`
+  }
+}
