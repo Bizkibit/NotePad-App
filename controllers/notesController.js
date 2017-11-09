@@ -42,16 +42,16 @@ module.exports =  {
 
   patchAction (req, res, next)  {
     let {id} = req.params;
-    let {title, content} = req.body;
+    let {title, content, starred} = req.body;
     try {
       Note
       .findById(id)
-      .then(note => note.update({title, content}))
+      .then(note => note.update({title, content, starred}))
       .then((note) => res.json(note))
       // .then((note) => Note.findAll())
       // .then(notes => res.json(notes))
     } catch (e) {
-
+      res.json(e);
     }
   }
 };

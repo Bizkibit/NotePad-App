@@ -230,6 +230,7 @@ const delete_cookie = function(name) {
 function starNotes(e)  {
   let {parentElement} = e.currentTarget;
   parentElement.classList.toggle("starred");
+  debugger;
   if (parentElement.classList.contains("starred"))  {
     e.currentTarget.innerHTML = `<i class="fa fa-star" aria-hidden="true"></i>`
   } else {

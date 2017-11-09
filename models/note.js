@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   var Note = sequelize.define('Note', {
     title: DataTypes.STRING,
-    content: DataTypes.TEXT
+    content: DataTypes.TEXT,
+    starred: DataTypes.BOOLEAN
   });
   Note.associate = function({User}) {
     Note.belongsTo(User);
