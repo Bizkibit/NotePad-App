@@ -35,11 +35,11 @@ function renderNotes(notes)  {
   let board = document.querySelector('.board');
   let notesHTML = notes.map( note => {
     return `
-      <div class="note" id="note-${note.id}">
+      <div class="note ${note.starred?"starred":""}" id="note-${note.id}">
         <h3>${note.title}</h3>
         <input class="delete" type="button" name="deleteButton" value="X">
         <input class="pin" type="button" name="pinButton">
-        <button class="star" name="starButton"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+        <button class="star" name="starButton"><i class="fa fa-star${note.starred?"":"-o"}" aria-hidden="true"></i></button>
         <p>${note.content}</p>
       </div>
     `
@@ -227,13 +227,24 @@ const delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
 
-function starNotes(e)  {
+  function starNotes(e)  {
   let {parentElement} = e.currentTarget;
+  let id = parentElement.id.split('-')[1];
   parentElement.classList.toggle("starred");
-  debugger;
+  let fData = new FormData();
   if (parentElement.classList.contains("starred"))  {
-    e.currentTarget.innerHTML = `<i class="fa fa-star" aria-hidden="true"></i>`
+    fData.append('starred', true);
+    fetch(`/notes/${id}`, {
+      method: "PATCH",
+      body: fData
+    });
+    e.currentTarget.innerHTML = `<i class="fa fa-star" aria-hidden="true"></i>`;
   } else {
+    fData.append('starred', false);
+    fetch(`/notes/${id}`, {
+      method: "PATCH",
+      body: fData
+    });
     e.currentTarget.innerHTML = `<i class="fa fa-star-o" aria-hidden="true"></i>`
   }
 }
