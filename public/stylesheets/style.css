@@ -84,12 +84,13 @@ h1 , p , h3, #new-note-button {
   left: 0;
   width: initial;
   background-color: transparent;
-  color: transparent;
+  color: #e8cc8d;
   font-size: 3vmin;
   border: none;
   outline: none;
   width: 20%;
   height: 20%;
+  transition: color 0.3s;
 }
 
 .delete:hover {
@@ -187,9 +188,10 @@ h1 , p , h3, #new-note-button {
   background-color: transparent;
   border: none;
   outline: none;
-  color: #9b7b58;
+  color: #e8cc8d;
+  transition: color 0.3s;
 }
 
-.starred  {
-
+.star:hover, .starred > .star {
+  color: #9b7b58;
 }
