@@ -74,6 +74,7 @@ h1 , p , h3, #new-note-button {
   background-size: 40vmin 40vmin;
   overflow: auto;
   position: relative;
+  transition: order 0.5s;
 }
 
 .delete {

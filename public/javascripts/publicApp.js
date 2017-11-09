@@ -1,8 +1,15 @@
 window.onload = function()  {
   displayNotes();
   // let form = document.querySelector('#new-note-form');
-  let button = document.querySelector('button');
-  button.addEventListener('click', newNote )
+  let newButton = document.querySelector('#new-note-button');
+  let resetButton = document.querySelector('#reset-button');
+  let select = document.querySelector('select');
+  newButton.addEventListener('click', newNote );
+  select.addEventListener('change', orderNotes);
+  resetButton.addEventListener('click',()=> {
+    document.cookie.split(";").map(delete_cookie);
+    displayNotes();
+  })
     // let body = document.querySelector('body');
     // let html = document.querySelector('html');
     // body.style.filter = "blur(5px)";
@@ -230,6 +237,7 @@ const delete_cookie = function(name) {
   function starNotes(e)  {
   let {parentElement} = e.currentTarget;
   let id = parentElement.id.split('-')[1];
+  // let select = document.querySelector('select');
   parentElement.classList.toggle("starred");
   let fData = new FormData();
   if (parentElement.classList.contains("starred"))  {
@@ -239,12 +247,24 @@ const delete_cookie = function(name) {
       body: fData
     });
     e.currentTarget.innerHTML = `<i class="fa fa-star" aria-hidden="true"></i>`;
+    // parentElement.style.order = (select.value==="2") ? "-1" : "0";
   } else {
     fData.append('starred', false);
     fetch(`/notes/${id}`, {
       method: "PATCH",
       body: fData
     });
-    e.currentTarget.innerHTML = `<i class="fa fa-star-o" aria-hidden="true"></i>`
+    e.currentTarget.innerHTML = `<i class="fa fa-star-o" aria-hidden="true"></i>`;
+    // parentElement.style.order = (select.value==="2") ? "0" : "-1";
+  }
+}
+
+function orderNotes(e) {
+  let {target} = e;
+  let starred = document.querySelectorAll('.starred')
+  if (target.value === "1") {
+    starred.forEach(note => note.style.order = "0");
+  } else if (target.value === "2") {
+    starred.forEach(note => note.style.order = "-1");
   }
 }
