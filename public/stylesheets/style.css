@@ -7,9 +7,9 @@ body {
   background-color: black;
 }
 
-body > h1 {
+/*body > h1 {
   color: #efddac;
-}
+}*/
 
 a {
   color: #00B7FF;
@@ -28,7 +28,7 @@ h1 , p , h3, #new-note-button {
   align-items: center;
   }
 
-  #new-note-form input, button:first-child {
+  #new-note-form input {
   width : 60vmin;
   box-sizing: border-box;
   display: block;
@@ -194,4 +194,36 @@ h1 , p , h3, #new-note-button {
 
 .star:hover, .starred > .star {
   color: #9b7b58;
+}
+
+header {
+  color: #efddac;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5vmin;
+}
+
+header h1 {
+  color: #efddac;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  width: 50vmin;
+  align-self: center;
+}
+
+nav > * {
+  font-size: 14px;
+  width: 15vmin;
+  background-color: #efddac;
+  border: black;
+  transition: background-color 0.5s, color 0.5s;
+  border-radius: 5px;
+}
+
+nav > *:hover {
+  background-color: black;
+  color: #efddac;
 }
